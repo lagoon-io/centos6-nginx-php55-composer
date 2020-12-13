@@ -22,11 +22,12 @@ RUN chmod 777 /usr/bin/composer
 COPY ./php55/repos/nginx.repo /etc/yum.repos.d/nginx.repo
 
 RUN echo "//--- phpインストール ---//" && \
-  #   # remiリポジトリ追加
+  # EOL後のURLに修正
   sed -i -e "s/^mirrorlist=http:\/\/mirrorlist.centos.org/#mirrorlist=http:\/\/mirrorlist.centos.org/g" /etc/yum.repos.d/CentOS-Base.repo && \
   sed -i -e "s/^#baseurl=http:\/\/mirror.centos.org/baseurl=http:\/\/vault.centos.org/g" /etc/yum.repos.d/CentOS-Base.repo && \
   sed -i -e 's/NETWORKING_IPV6=yes/NETWORKING_IPV6=no/' /etc/sysconfig/network && \
-  # EOL後のURL
+  # remiリポジトリ追加
+  # EOL後のURL指定
   rpm -Uvh https://archives.fedoraproject.org/pub/archive/epel/6/x86_64/epel-release-6-8.noarch.rpm && \
   rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm && \
   yum -y install --enablerepo=remi,remi-php55 ${PHP_PACKAGES} && \
