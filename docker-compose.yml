@@ -1,0 +1,12 @@
+version: "2"
+services:
+  # CentOS6 + Nginx + PHP5.5
+  webapp:
+    container_name: php-webapp
+    build:
+      dockerfile: ./php55/Dockerfile
+      context: .
+    ports:
+      - "8080:80"
+      - "9011:9001"
+      - "22011:22"
